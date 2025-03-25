@@ -1,0 +1,141 @@
+:root {
+  --dropdown-bg: #fff;
+  --dropdown-border: #e2e8f0;
+  --dropdown-text: #1a1a1a;
+  --dropdown-placeholder: #a0aec0;
+  --dropdown-hover: #f7fafc;
+  --dropdown-selected: #edf2f7;
+  --dropdown-radius: 0.375rem;
+  --dropdown-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  --transition-speed: 0.2s;
+  --highlight-color: #fff8b3; /* Cor de destaque ao buscar */
+}
+
+/* Container principal */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  color: var(--dropdown-text);
+}
+
+/* Área visível (modo single e multiple podem ter variações) */
+.dropdown-selected {
+  display: flex;
+  flex-wrap: wrap; /* para acomodar tags no modo multiple */
+  align-items: center;
+  transition: background var(--transition-speed), border var(--transition-speed);
+  cursor: text;
+  min-height: 36px;
+}
+
+.dropdown-selected:hover {
+  background-color: var(--dropdown-hover);
+}
+
+/* Para exibir as "tags" de seleção no modo multiple */
+.dropdown-selected .tag {
+  background-color: var(--dropdown-selected);
+  padding: 4px 8px;
+  margin-right: 4px;
+  margin-bottom: 2px;
+  border-radius: 3px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.dropdown-selected .tag-remove {
+  display: inline-block;
+  margin-left: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Input de busca dentro da área de seleção */
+.dropdown-search-inside {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--dropdown-text);
+  min-width: 80px;
+}
+
+.dropdown-search-inside::placeholder {
+  color: var(--dropdown-placeholder);
+}
+
+/* Lista de opções */
+.dropdown-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: 100%;
+  background: var(--dropdown-bg);
+  border: 1px solid var(--dropdown-border);
+  border-radius: var(--dropdown-radius);
+  box-shadow: var(--dropdown-shadow);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 999;
+  display: none;
+  transform-origin: top;
+  opacity: 0;
+  transform: scaleY(0.95);
+  transition: opacity var(--transition-speed), transform var(--transition-speed);
+}
+
+.dropdown-list.open {
+  display: block;
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+/* Itens */
+.dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background var(--transition-speed);
+}
+
+.dropdown-item:hover {
+  background-color: var(--dropdown-hover);
+}
+
+/* Item selecionado (no modo single, ou realce no multiple) */
+.dropdown-item.selected-item {
+  background-color: var(--dropdown-selected);
+  font-weight: 600;
+}
+
+/* Item de "Não encontrado..." */
+.dropdown-not-found {
+  color: #888;
+}
+
+/* Label de optgroup */
+.optgroup-label {
+  font-weight: bold;
+  padding: 8px 12px;
+  background: #f7fafc;
+  color: #4a5568;
+  border-bottom: 1px solid var(--dropdown-border);
+}
+
+/* Scrollbar minimalista */
+.dropdown-list::-webkit-scrollbar {
+  width: 6px;
+}
+.dropdown-list::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
+.dropdown-list::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border-radius: 3px;
+}
+
+/* Destaque do texto encontrado */
+.highlight {
+  background-color: var(--highlight-color);
+  font-weight: bold;
+}
