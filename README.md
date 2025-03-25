@@ -36,26 +36,75 @@ html
 <link rel="stylesheet" href="seu-caminho/dropdown.css">
 <script src="seu-caminho/dropdown.js"></script>
 Uso
-3.1 Configuração Básica
-Marque seu <select> com a classe dropdown:
+3.1 Configurando o <select>
+Para transformar um <select> nativo em um dropdown customizado, você deve adicionar a classe dropdown ao elemento <select>. O script dropdown.js detecta automaticamente todos os <select> com essa classe ao carregar a página (DOMContentLoaded) e os converte em dropdowns interativos.
+Exemplo Básico (Modo Single)
 html
-<select id="meu-select" class="dropdown" data-valor="Opção Pré-Selecionada">
+<select id="meu-select" class="dropdown">
     <option value="">Selecione...</option>
-    <option value="Opção 1">Opção 1</option>
-    <option value="Opção 2">Opção 2</option>
+    <option value="opcao1">Opção 1</option>
+    <option value="opcao2">Opção 2</option>
 </select>
-Para múltipla seleção, adicione o atributo multiple:
+Classe obrigatória: dropdown — ativa o comportamento customizado.
+Comportamento: Substitui o <select> por um campo de busca com lista de opções filtráveis.
+Modo Múltiplo (Tags)
+Para permitir seleção múltipla com exibição de tags:
 html
-<select multiple ...>
-Para permitir adicionar novas opções dinamicamente, inclua:
+<select id="meu-select-multi" class="dropdown" multiple>
+    <option value="">Selecione...</option>
+    <option value="opcao1">Opção 1</option>
+    <option value="opcao2">Opção 2</option>
+</select>
+Atributo multiple: Habilita o modo de múltipla seleção.
+Resultado: Opções selecionadas aparecem como tags removíveis.
+Pré-selecionar Opções (data-valor)
+Use o atributo data-valor para definir uma opção pré-selecionada ao carregar:
 html
-add-new="true"
-3.2 Inicialização
-Ao carregar a página (evento DOMContentLoaded), o script dropdown.js converte automaticamente todos os <select class="dropdown">.
+<select id="meu-select" class="dropdown" data-valor="opcao2">
+    <option value="">Selecione...</option>
+    <option value="opcao1">Opção 1</option>
+    <option value="opcao2">Opção 2</option>
+</select>
+Atributo data-valor: Pode ser o value ou o texto (textContent) da opção.
+No modo múltiplo: Use valores separados por vírgula, ex.: data-valor="opcao1,opcao2".
+Adicionar Novas Opções Dinamicamente
+Permita que usuários criem novas opções com o atributo add-new:
+html
+<select id="meu-select" class="dropdown" add-new="true">
+    <option value="">Selecione...</option>
+    <option value="opcao1">Opção 1</option>
+</select>
+Atributo add-new="true": Exibe a opção "Adicionar '<valor>'" ao digitar algo não existente.
+Comportamento: Pressionar Enter ou clicar na sugestão adiciona a nova opção ao <select>.
+Suporte a Optgroups
+Organize opções em grupos usando <optgroup>:
+html
+<select id="meu-select" class="dropdown">
+    <option value="">Selecione...</option>
+    <optgroup label="Grupo 1">
+        <option value="opcao1">Opção 1</option>
+        <option value="opcao2">Opção 2</option>
+    </optgroup>
+    <optgroup label="Grupo 2">
+        <option value="opcao3">Opção 3</option>
+    </optgroup>
+</select>
+Compatibilidade: Os rótulos dos <optgroup> aparecem na lista e são filtrados dinamicamente.
+Identificação por ID ou Name
+O dropdown customizado recebe uma classe adicional baseada no id ou name do <select>:
+Prioridade: id (ex.: <select id="meu-select" class="dropdown"> gera .custom-dropdown.meu-select).
+Fallback: name (se id não estiver presente).
+Uso: Facilita estilização específica via CSS.
+3.2 Inicialização Automática
+O script inicializa todos os <select class="dropdown"> automaticamente ao carregar a página. Não é necessário chamar funções manualmente, a menos que você precise atualizar dinamicamente.
 3.3 Atualização Programática
-Para atualizar o valor de um dropdown já montado:
+Para atualizar um dropdown já carregado:
 javascript
-updateCustomDropdown('meu-select', 'Opção 2');
+updateCustomDropdown('meu-select', 'opcao2');
+Parâmetros:
+'meu-select': O id do <select>.
+'opcao2': O value ou texto da opção a ser selecionada.
+No modo múltiplo: Use uma string com vírgulas, ex.: 'opcao1,opcao2'.
 Estrutura do Código
 dropdown.css
 Estiliza o container principal, itens, tags, placeholders, etc.
@@ -67,35 +116,29 @@ Funções principais:
 createCustomDropdown: Invocada automaticamente para cada <select.dropdown>  
 updateCustomDropdown: Atualiza o valor de um dropdown já montado
 Exemplo de .gitignore
-Segue um exemplo de .gitignore básico para projetos web/WordPress:
-# Logs e arquivos temporários do sistema
+# Logs e arquivos temporários
 *.log
 *.tmp
 *.DS_Store
 Thumbs.db
-ehthumbs.db
 
-# Pastas comuns em builds front-end
+# Pastas de build
 node_modules/
 dist/
 build/
 .cache/
 
-# Se for um tema ou plugin WordPress, ignore:
+# WordPress
 wp-content/uploads/
 
 # Configurações de IDE
 .vscode/
 .idea/
-*.sublime-workspace
-*.sublime-project
-
-# Configurações de sistema
+*.sublime-*
 .env
-Adicione ou remova conforme suas necessidades.
 Contribuindo
 Faça um fork do projeto.
-Crie uma branch para sua feature:
+Crie uma branch:
 bash
 git checkout -b minha-feature
 Commit suas mudanças:
@@ -108,11 +151,13 @@ Abra um Pull Request.
 Licença
 Este projeto está licenciado sob a MIT License (LICENSE).
 
-### Principais ajustes realizados:
-1. **Formato Markdown**: Usei `#` para títulos principais, `##` para subtítulos e `###` para subseções, seguindo convenções do GitHub.
-2. **Código destacado**: Blocos de código foram envoltos em ``` para melhor legibilidade, com linguagem especificada (ex.: `bash`, `html`, `javascript`).
-3. **Links no índice**: Adicionados links âncora para navegação rápida.
-4. **Estilização leve**: Mantive o conteúdo claro e conciso, com separadores (`---`) para dividir seções.
-5. **Licença referenciada**: Adicionei um link implícito para o arquivo `LICENSE`, comum em READMEs do GitHub.
+### Explicação dos ajustes na seção "Uso":
+1. **Classe `.dropdown`**: Expliquei que é obrigatória para ativar o comportamento customizado.
+2. **Modo Single e Múltiplo**: Detalhei como configurar cada um, incluindo o atributo `multiple`.
+3. **Atributo `data-valor`**: Incluí instruções para pré-seleção, com suporte a múltiplos valores.
+4. **Atributo `add-new`**: Descrevi como habilitar a criação dinâmica de opções.
+5. **Suporte a `<optgroup>`**: Mostrei como usar grupos de opções.
+6. **Identificação por `id` ou `name`**: Expliquei como o script adiciona classes para estilização.
+7. **Exemplos práticos**: Forneci trechos de código HTML claros para cada caso.
 
-Esse formato é bem aceito e visualmente agradável no GitHub! Se precisar de mais ajustes, é só avisar.
+Essas instruções refletem diretamente o comportamento do código JavaScript fornecido, tornando o README um guia completo e funcional para usuários. Se precisar de mais ajustes ou exemplos, é só avisar!
