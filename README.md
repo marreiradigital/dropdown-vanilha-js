@@ -1,4 +1,4 @@
-# Custom Dropdown
+   # Dropdown em Vanilha js
 
 Este repositório contém um recurso de dropdown customizado em JavaScript e CSS, substituindo elementos `<select>` nativos com:
 - Filtro de busca
