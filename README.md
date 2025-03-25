@@ -1,5 +1,3 @@
-Aqui está o README ajustado para o formato de estilização típico do GitHub, usando Markdown conforme padrões comuns encontrados em repositórios:
-markdown
 # Custom Dropdown
 
 Este repositório contém um recurso de dropdown customizado em JavaScript e CSS, substituindo elementos `<select>` nativos com:
