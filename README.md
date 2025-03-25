@@ -1,4 +1,6 @@
+==========================
  README - Custom Dropdown
+==========================
 
 Este repositório contém um recurso de dropdown customizado em JavaScript e CSS, substituindo elementos <select> nativos com:
 - Filtro de busca
@@ -28,7 +30,7 @@ Este repositório contém um recurso de dropdown customizado em JavaScript e CSS
  2. INSTALAÇÃO
 --------------------------------
 1) Clone ou baixe este repositório:
-   git clone https://github.com/marreiradigital/dropdown-vanilha-js.git
+   git clone [https://github.com/seu-usuario/seu-repo.git](https://github.com/marreiradigital/dropdown-vanilha-js.git)
 
 2) Inclua o arquivo "dropdown.css" e o arquivo "dropdown.js" no seu projeto.
 
